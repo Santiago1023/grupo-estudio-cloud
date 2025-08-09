@@ -1,0 +1,258 @@
+# .github/workflows/deploy-students-community.yml
+name: Deploy Students Community Day
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'aws-cloud-club-udea/student-community-day/**'
+      - '.github/workflows/deploy-students-community.yml'
+
+env:
+  # Configuraciones globales
+  AWS_REGION: us-east-1
+  SOURCE_DIR: aws-cloud-club-udea/student-community-day
+  S3_BUCKET: ${{ secrets.S3_BUCKET_NAME }}
+  CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check project structure
+        run: |
+          echo "🔍 Checking project structure..."
+          if [ ! -d "${{ env.SOURCE_DIR }}" ]; then
+            echo "❌ Directory ${{ env.SOURCE_DIR }} not found"
+            exit 1
+          fi
+          
+          echo "✅ Project directory found"
+          echo "📁 Contents:"
+          ls -la "${{ env.SOURCE_DIR }}"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: '${{ env.SOURCE_DIR }}/package-lock.json'
+
+      - name: Install dependencies
+        run: |
+          cd "${{ env.SOURCE_DIR }}"
+          
+          echo "📦 Installing Astro dependencies..."
+          
+          if [ -f "package-lock.json" ]; then
+            echo "🔒 Using npm ci (with package-lock.json)..."
+            npm ci
+          elif [ -f "yarn.lock" ]; then
+            echo "🧶 Using yarn (with yarn.lock)..."
+            yarn install --frozen-lockfile
+          elif [ -f "package.json" ]; then
+            echo "📦 Using npm install (package.json only)..."
+            npm install
+          else
+            echo "❌ No package.json found!"
+            exit 1
+          fi
+          
+          echo "✅ Dependencies installed successfully"
+
+      - name: Build Astro project
+        run: |
+          cd "${{ env.SOURCE_DIR }}"
+          echo "🏗️ Building Astro project..."
+          
+          # Verificar que el script build existe
+          if npm run | grep -q "build"; then
+            npm run build
+          else
+            echo "❌ No build script found in package.json"
+            echo "Available scripts:"
+            npm run
+            exit 1
+          fi
+          
+          echo "✅ Build completed"
+          echo "📁 Build output:"
+          ls -la dist/
+        env:
+          NODE_ENV: production
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+          # Agregamos configuración de sesión para mayor seguridad
+          role-duration-seconds: 3600
+          role-skip-session-tagging: true
+
+      - name: Verify AWS credentials
+        run: |
+          echo "🔍 Verifying AWS credentials..."
+          aws sts get-caller-identity
+          echo "✅ AWS credentials are valid"
+
+      - name: Deploy to S3 with optimized caching
+        run: |
+          cd "${{ env.SOURCE_DIR }}"
+          
+          echo "🚀 Starting S3 deployment..."
+          echo "📁 Deploying from: dist/"
+          echo "🪣 Target bucket: ${{ env.S3_BUCKET }}"
+          
+          # Verificar que el bucket existe
+          if ! aws s3 ls "s3://${{ env.S3_BUCKET }}" >/dev/null 2>&1; then
+            echo "❌ Cannot access S3 bucket: ${{ env.S3_BUCKET }}"
+            echo "Please check bucket name and permissions"
+            exit 1
+          fi
+          
+          # 1. HTML files - No cache (always fresh)
+          echo "📄 Uploading HTML files..."
+          aws s3 sync dist/ s3://${{ env.S3_BUCKET }} \
+            --delete \
+            --cache-control "public, max-age=0, must-revalidate" \
+            --exclude "*" \
+            --include "*.html" \
+            --no-progress
+          
+          # 2. Astro assets - Long cache (1 year)
+          echo "🎨 Uploading Astro static assets..."
+          aws s3 sync dist/ s3://${{ env.S3_BUCKET }} \
+            --cache-control "public, max-age=31536000, immutable" \
+            --exclude "*" \
+            --include "_astro/*.css" \
+            --include "_astro/*.js" \
+            --include "_astro/*.mjs" \
+            --no-progress
+          
+          # 3. Fonts - Long cache
+          echo "🔤 Uploading fonts..."
+          aws s3 sync dist/ s3://${{ env.S3_BUCKET }} \
+            --cache-control "public, max-age=31536000, immutable" \
+            --exclude "*" \
+            --include "*.woff" \
+            --include "*.woff2" \
+            --include "*.ttf" \
+            --include "*.otf" \
+            --no-progress
+          
+          # 4. Images - Long cache
+          echo "📸 Uploading images..."
+          aws s3 sync dist/ s3://${{ env.S3_BUCKET }} \
+            --cache-control "public, max-age=31536000" \
+            --exclude "*" \
+            --include "*.svg" \
+            --include "*.png" \
+            --include "*.jpg" \
+            --include "*.jpeg" \
+            --include "*.webp" \
+            --include "*.gif" \
+            --include "*.ico" \
+            --no-progress
+          
+          # 5. Other files - Medium cache
+          echo "📋 Uploading other files..."
+          aws s3 sync dist/ s3://${{ env.S3_BUCKET }} \
+            --cache-control "public, max-age=86400" \
+            --exclude "*" \
+            --include "*.json" \
+            --include "*.xml" \
+            --include "*.txt" \
+            --include "*.pdf" \
+            --no-progress
+          
+          echo "✅ All files deployed to S3 successfully!"
+
+      - name: Invalidate CloudFront
+        run: |
+          echo "🔄 Creating CloudFront invalidation..."
+          
+          # Verificar que la distribución existe
+          if ! aws cloudfront get-distribution --id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} >/dev/null 2>&1; then
+            echo "❌ Cannot access CloudFront distribution: ${{ env.CLOUDFRONT_DISTRIBUTION_ID }}"
+            echo "Please check distribution ID and permissions"
+            exit 1
+          fi
+          
+          INVALIDATION_ID=$(aws cloudfront create-invalidation \
+            --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*" \
+            --query 'Invalidation.Id' \
+            --output text)
+          
+          echo "⏳ Invalidation ID: $INVALIDATION_ID"
+          echo "🌐 CloudFront will update in a few minutes"
+
+      - name: Deployment Summary
+        run: |
+          CLOUDFRONT_URL=$(aws cloudfront get-distribution \
+            --id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --query 'Distribution.DomainName' \
+            --output text)
+          
+          echo ""
+          echo "🎉 Students Community Day deployment completed!"
+          echo ""
+          echo "📊 Deployment Summary:"
+          echo "├── 🚀 Framework: Astro"
+          echo "├── 📁 Source: ${{ env.SOURCE_DIR }}"
+          echo "├── 🪣 S3 Bucket: ${{ env.S3_BUCKET }}"
+          echo "├── 🔗 CloudFront: ${{ env.CLOUDFRONT_DISTRIBUTION_ID }}"
+          echo "└── 🌐 Live URL: https://$CLOUDFRONT_URL"
+          echo ""
+          echo "Your site is now live! 🚀"
+
+  # Verificación opcional
+  verify:
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: success()
+    
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Test deployment
+        run: |
+          echo "⏳ Waiting 30 seconds for CloudFront..."
+          sleep 30
+          
+          CLOUDFRONT_URL=$(aws cloudfront get-distribution \
+            --id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --query 'Distribution.DomainName' \
+            --output text)
+          
+          echo "🔍 Testing: https://$CLOUDFRONT_URL"
+          
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://$CLOUDFRONT_URL" || echo "000")
+          
+          case $HTTP_STATUS in
+            200)
+              echo "✅ Site is live and responding perfectly!"
+              ;;
+            403|404)
+              echo "⚠️ Site returned $HTTP_STATUS - CloudFront may still be updating"
+              ;;
+            000)
+              echo "⚠️ Could not connect - CloudFront may still be updating"
+              ;;
+            *)
+              echo "⚠️ Site returned HTTP $HTTP_STATUS"
+              ;;
+          esac
