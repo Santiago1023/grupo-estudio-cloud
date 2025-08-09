@@ -20,87 +20,26 @@ const lang = getCurrentLanguage(Astro.url);
           </div>
           <div class="benefit-item">
             <i class="fas fa-check-circle"></i>
-            <span>{t(lang, 'registration.benefits.lunch')}</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fas fa-check-circle"></i>
-            <span>{t(lang, 'registration.benefits.certificate')}</span>
-          </div>
-          <div class="benefit-item">
-            <i class="fas fa-check-circle"></i>
             <span>{t(lang, 'registration.benefits.networking')}</span>
           </div>
           <div class="benefit-item">
             <i class="fas fa-check-circle"></i>
-            <span>{t(lang, 'registration.benefits.swag')}</span>
+            <span>{lang === 'es' ? 'Recursos de AWS' : 'AWS Resources'}</span>
           </div>
         </div>
       </div>
       
-      <div class="register-form">
-        <div class="form-card">
+      <div class="register-cta">
+        <div class="cta-card">
           <h3>{t(lang, 'registration.form.title')}</h3>
           <p>{t(lang, 'registration.form.subtitle')}</p>
           
-          <form class="registration-form">
-            <div class="form-group">
-              <label for="name">{t(lang, 'registration.form.fields.name')}</label>
-              <input type="text" id="name" name="name" required />
-            </div>
-            
-            <div class="form-group">
-              <label for="email">{t(lang, 'registration.form.fields.email')}</label>
-              <input type="email" id="email" name="email" required />
-            </div>
-            
-            <div class="form-group">
-              <label for="university">{t(lang, 'registration.form.fields.university')}</label>
-              <input type="text" id="university" name="university" required />
-            </div>
-            
-            <div class="form-group">
-              <label for="track">{t(lang, 'registration.form.fields.track.label')}</label>
-              <select id="track" name="track" required>
-                <option value="">{t(lang, 'registration.form.fields.track.placeholder')}</option>
-                <option value="fundamentals">{t(lang, 'registration.form.fields.track.options.fundamentals')}</option>
-                <option value="devops">{t(lang, 'registration.form.fields.track.options.devops')}</option>
-                <option value="aiml">{t(lang, 'registration.form.fields.track.options.aiml')}</option>
-              </select>
-            </div>
-            
-            <div class="form-group">
-              <label for="experience">{t(lang, 'registration.form.fields.experience.label')}</label>
-              <select id="experience" name="experience" required>
-                <option value="">{t(lang, 'registration.form.fields.experience.placeholder')}</option>
-                <option value="beginner">{t(lang, 'registration.form.fields.experience.options.beginner')}</option>
-                <option value="intermediate">{t(lang, 'registration.form.fields.experience.options.intermediate')}</option>
-                <option value="advanced">{t(lang, 'registration.form.fields.experience.options.advanced')}</option>
-              </select>
-            </div>
-            
-            <div class="form-group checkbox-group">
-              <label class="checkbox-label">
-                <input type="checkbox" required />
-                <span class="checkmark"></span>
-                {t(lang, 'registration.form.terms.text')} <a href="#" target="_blank">{t(lang, 'registration.form.terms.link')}</a>
-              </label>
-            </div>
-            
-            <div class="form-group checkbox-group">
-              <label class="checkbox-label">
-                <input type="checkbox" />
-                <span class="checkmark"></span>
-                {t(lang, 'registration.form.newsletter')}
-              </label>
-            </div>
-            
-            <button type="submit" class="btn btn-primary btn-large">
-              <i class="fas fa-ticket-alt"></i>
-              {t(lang, 'registration.form.submit')}
-            </button>
-          </form>
+          <a href="https://www.eventbrite.co/e/aws-student-community-day-tickets-1571952535349" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-large">
+            <i class="fas fa-ticket-alt"></i>
+            {t(lang, 'registration.form.submit')}
+          </a>
           
-          <div class="form-footer">
+          <div class="cta-footer">
             <p>{t(lang, 'registration.form.footer')}</p>
           </div>
         </div>
@@ -130,7 +69,7 @@ const lang = getCurrentLanguage(Astro.url);
 
   .register-info p {
     font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--aws-white);
     margin-bottom: 2rem;
     line-height: 1.6;
   }
@@ -145,7 +84,7 @@ const lang = getCurrentLanguage(Astro.url);
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--aws-white);
   }
 
   .benefit-item i {
@@ -154,121 +93,40 @@ const lang = getCurrentLanguage(Astro.url);
     flex-shrink: 0;
   }
 
-  .form-card {
+  .cta-card {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
-    padding: 2rem;
+    padding: 3rem 2rem;
+    text-align: center;
   }
 
-  .form-card h3 {
+  .cta-card h3 {
     color: var(--aws-white);
     font-size: 1.8rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
 
-  .form-card > p {
-    color: rgba(255, 255, 255, 0.8);
+  .cta-card > p {
+    color: var(--aws-white);
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+  }
+
+  .btn-large {
+    width: 100%;
+    max-width: 300px;
     margin-bottom: 2rem;
   }
 
-  .registration-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .form-group label {
-    color: var(--aws-white);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-  }
-
-  .form-group input,
-  .form-group select {
-    padding: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--aws-white);
-    font-size: 1rem;
-    transition: all 0.3s ease;
-  }
-
-  .form-group input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-  }
-
-  .form-group input:focus,
-  .form-group select:focus {
-    outline: none;
-    border-color: var(--aws-orange);
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  .checkbox-group {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .checkbox-label {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    cursor: pointer;
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
-
-  .checkbox-label input[type="checkbox"] {
-    display: none;
-  }
-
-  .checkmark {
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.5);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .checkbox-label input[type="checkbox"]:checked + .checkmark {
-    background: var(--aws-orange);
-    border-color: var(--aws-orange);
-  }
-
-  .checkbox-label input[type="checkbox"]:checked + .checkmark::after {
-    content: '✓';
-    color: var(--aws-white);
-    font-weight: bold;
-    font-size: 0.8rem;
-  }
-
-  .checkbox-label a {
-    color: var(--aws-orange);
-    text-decoration: underline;
-  }
-
-  .form-footer {
+  .cta-footer {
     margin-top: 1rem;
     text-align: center;
   }
 
-  .form-footer p {
-    color: rgba(255, 255, 255, 0.7);
+  .cta-footer p {
+    color: var(--aws-white);
     font-size: 0.85rem;
     margin: 0;
   }
@@ -278,6 +136,10 @@ const lang = getCurrentLanguage(Astro.url);
     .register-content {
       grid-template-columns: 1fr;
       gap: 3rem;
+    }
+
+    .cta-card {
+      padding: 2rem 1.5rem;
     }
   }
 </style>
