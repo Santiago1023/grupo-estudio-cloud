@@ -4,6 +4,7 @@
     "about": "Acerca del SCD",
     "tracks": "Tracks",
     "speakers": "Speakers",
+    "agenda": "Agenda",
     "sponsors": "Patrocinadores",
     "location": "Ubicación",
     "register": "Registrarse"
@@ -189,6 +190,9 @@
         "description": "Completa cualquier track para recibir un certificado de participación y recursos de aprendizaje de AWS."
       }
     }
+  },
+  "agenda": {
+    "title": "Agenda del Evento"
   },
   "speakers": {
     "badge": "Speakers Expertos",

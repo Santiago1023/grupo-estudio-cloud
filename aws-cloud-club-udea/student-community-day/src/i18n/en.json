@@ -4,6 +4,7 @@
     "about": "About SCD",
     "tracks": "Tracks",
     "speakers": "Speakers",
+    "agenda": "Agenda",
     "sponsors": "Sponsors",
     "location": "Location",
     "register": "Register Now"
@@ -189,6 +190,9 @@
         "description": "Complete any track to receive a certificate of participation and AWS learning resources."
       }
     }
+  },
+  "agenda": {
+    "title": "Event Agenda"
   },
   "speakers": {
     "badge": "Expert Speakers",
