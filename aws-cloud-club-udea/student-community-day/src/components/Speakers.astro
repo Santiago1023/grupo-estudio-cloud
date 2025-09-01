@@ -2,6 +2,9 @@
 import { getCurrentLanguage, t } from '../i18n/utils';
 
 const lang = getCurrentLanguage(Astro.url);
+
+const response = await fetch('https://sessionize.com/api/v2/u33lk5c0/view/SpeakerWall');
+const speakers = await response.json();
 ---
 
 <section id="speakers" class="speakers">
@@ -22,80 +25,18 @@ const lang = getCurrentLanguage(Astro.url);
     </div>
     
     <div class="speakers-grid">
-      <!-- Speaker 1 -->
-      <div class="speaker-card">
-        <div class="speaker-image">
-          <div class="avatar-placeholder">
-            <i class="fas fa-user"></i>
+      {speakers.map((speaker: any) => (
+        <div class="speaker-card">
+          <div class="speaker-image">
+            <img src={speaker.profilePicture} alt={speaker.fullName} />
+          </div>
+          
+          <div class="speaker-info">
+            <h3>{speaker.fullName}</h3>
+            <p class="speaker-tagline">{speaker.tagLine}</p>
           </div>
         </div>
-        
-        <div class="speaker-info">
-          <h3>{t(lang, 'speakers.speaker1.name')}</h3>
-          <p class="speaker-title">{t(lang, 'speakers.speaker1.title')}</p>
-          <p class="speaker-company">{t(lang, 'speakers.speaker1.company')}</p>
-          
-          <p class="speaker-bio">
-            {t(lang, 'speakers.speaker1.bio')}
-          </p>
-          
-          <div class="speaker-topics">
-            <span class="topic-tag">{t(lang, 'speakers.speaker1.topics.serverless')}</span>
-            <span class="topic-tag">{t(lang, 'speakers.speaker1.topics.devops')}</span>
-            <span class="topic-tag">{t(lang, 'speakers.speaker1.topics.migration')}</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Speaker 2 -->
-      <div class="speaker-card">
-        <div class="speaker-image">
-          <div class="avatar-placeholder">
-            <i class="fas fa-user"></i>
-          </div>
-        </div>
-        
-        <div class="speaker-info">
-          <h3>{t(lang, 'speakers.speaker2.name')}</h3>
-          <p class="speaker-title">{t(lang, 'speakers.speaker2.title')}</p>
-          <p class="speaker-company">{t(lang, 'speakers.speaker2.company')}</p>
-          
-          <p class="speaker-bio">
-            {t(lang, 'speakers.speaker2.bio')}
-          </p>
-          
-          <div class="speaker-topics">
-            <span class="topic-tag">{t(lang, 'speakers.speaker2.topics.ml')}</span>
-            <span class="topic-tag">{t(lang, 'speakers.speaker2.topics.ai')}</span>
-            <span class="topic-tag">{t(lang, 'speakers.speaker2.topics.data')}</span>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Speaker 3 -->
-      <div class="speaker-card">
-        <div class="speaker-image">
-          <div class="avatar-placeholder">
-            <i class="fas fa-user"></i>
-          </div>
-        </div>
-        
-        <div class="speaker-info">
-          <h3>{t(lang, 'speakers.speaker3.name')}</h3>
-          <p class="speaker-title">{t(lang, 'speakers.speaker3.title')}</p>
-          <p class="speaker-company">{t(lang, 'speakers.speaker3.company')}</p>
-          
-          <p class="speaker-bio">
-            {t(lang, 'speakers.speaker3.bio')}
-          </p>
-          
-          <div class="speaker-topics">
-            <span class="topic-tag">{t(lang, 'speakers.speaker3.topics.security')}</span>
-            <span class="topic-tag">{t(lang, 'speakers.speaker3.topics.compliance')}</span>
-            <span class="topic-tag">{t(lang, 'speakers.speaker3.topics.governance')}</span>
-          </div>
-        </div>
-      </div>
+      ))}
     </div>
     
     <div class="speakers-cta">
@@ -116,152 +57,77 @@ const lang = getCurrentLanguage(Astro.url);
 
   .speakers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.2rem;
     margin-top: 4rem;
     margin-bottom: 4rem;
   }
 
   .speaker-card {
-    background: var(--aws-white);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid var(--aws-gray-light);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .speaker-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--aws-orange), var(--aws-dark-blue));
   }
 
   .speaker-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
   }
 
   .speaker-image {
     position: relative;
     overflow: hidden;
-    height: 250px;
+    height: 160px;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .speaker-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    object-position: center;
     transition: transform 0.3s ease;
-  }
-
-  .avatar-placeholder {
-    width: 100%;
-    height: 100%;
-    background: var(--aws-gray-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--aws-gray);
-    font-size: 3rem;
-    border: 3px dashed var(--aws-gray);
   }
 
   .speaker-card:hover .speaker-image img {
     transform: scale(1.05);
   }
 
-  .speaker-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  .speaker-card:hover .speaker-overlay {
-    opacity: 1;
-  }
-
-  .social-links {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .social-links a {
-    width: 50px;
-    height: 50px;
-    background: var(--aws-orange);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--aws-white);
-    font-size: 1.2rem;
-    transition: all 0.3s ease;
-    transform: translateY(20px);
-  }
-
-  .speaker-card:hover .social-links a {
-    transform: translateY(0);
-  }
-
-  .social-links a:hover {
-    background: var(--aws-white);
-    color: var(--aws-orange);
-    transform: translateY(-5px);
-  }
-
   .speaker-info {
-    padding: 2rem;
+    padding: 1rem;
+    text-align: center;
   }
 
   .speaker-info h3 {
-    font-size: 1.4rem;
-    color: var(--aws-navy);
+    font-size: 1.2rem;
+    color: var(--aws-dark-blue);
     margin-bottom: 0.5rem;
+    font-weight: 700;
   }
 
-  .speaker-title {
-    font-weight: 600;
+  .speaker-tagline {
     color: var(--aws-orange);
-    margin-bottom: 0.25rem;
-  }
-
-  .speaker-company {
-    color: var(--aws-dark);
-    font-size: 0.9rem;
-    margin-bottom: 1rem;
-  }
-
-  .speaker-bio {
-    color: var(--aws-dark);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
-  }
-
-  .speaker-topics {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .topic-tag {
-    background: var(--aws-gray-light);
-    color: var(--aws-navy);
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.8rem;
     font-weight: 600;
-    border: 1px solid var(--aws-gray);
-    transition: all 0.3s ease;
-  }
-
-  .topic-tag:hover {
-    background: var(--aws-orange);
-    color: var(--aws-white);
-    border-color: var(--aws-orange);
+    font-size: 0.9rem;
+    margin: 0;
   }
 
   .speakers-cta {
@@ -288,25 +154,18 @@ const lang = getCurrentLanguage(Astro.url);
     margin-right: auto;
   }
 
-  /* Mobile Styles */
   @media (max-width: 768px) {
     .speakers-grid {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
     }
 
     .speaker-image {
-      height: 200px;
+      height: 140px;
     }
 
-    .social-links {
-      gap: 0.5rem;
-    }
-
-    .social-links a {
-      width: 40px;
-      height: 40px;
-      font-size: 1rem;
+    .speaker-info {
+      padding: 0.8rem;
     }
   }
 </style>
