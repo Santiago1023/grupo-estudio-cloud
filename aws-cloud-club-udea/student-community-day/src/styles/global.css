@@ -484,3 +484,30 @@ section {
     border: 1px solid black;
   }
 }
+
+/* Map Section */
+.map-section {
+  padding: 40px 0;
+  text-align: center;
+  background: var(--aws-gray-light);
+}
+
+.map-description {
+  color: var(--aws-blue);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
+.map-image {
+  max-width: 600px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.map-image:hover {
+  transform: scale(1.02);
+}
