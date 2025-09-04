@@ -25,7 +25,7 @@
       "learnMore": "Conocer Más"
     },
     "info": {
-      "time": "9:00 AM - 5:00 PM",
+      "time": "8:00 AM - 5:00 PM",
       "location": "Universidad EAFIT",
       "audience": "Estudiantes y Profesionales Bienvenidos"
     },
@@ -76,7 +76,7 @@
       "title": "Student Community Day",
       "badge": "Evento Gratuito",
       "date": "13 de Septiembre, 2025",
-      "time": "9:00 AM - 5:00 PM",
+      "time": "8:00 AM - 5:00 PM",
       "venue": "Universidad EAFIT",
       "capacity": "200+ Asistentes"
     },
@@ -239,7 +239,6 @@
     "description": "Estamos agradecidos con nuestros patrocinadores que hacen posible este evento y apoyan el crecimiento de la comunidad de computación en la nube.",
     "tiers": {
       "main": "Patrocinador Principal",
-      "mainPartner": "Aliado Principal",
       "academic": "Socio Académico",
       "community": "Socios Comunitarios"
     },
@@ -248,9 +247,6 @@
     },
     "udea": {
       "description": "Socio académico"
-    },
-    "eafit": {
-      "description": "Aliado principal que proporciona las instalaciones y el espacio para el evento"
     },
     "awsug": {
       "name": "AWS User Group Medellín",
@@ -295,13 +291,7 @@
       "directions": "Obtener Direcciones",
       "register": "Registrarse Ahora"
     },
-    "date": "13 de Septiembre, 2025 • 9:00 AM"
-  },
-  "organizers": {
-    "badge": "Organizadores del Evento",
-    "title": "Conoce Nuestro",
-    "titleHighlight": "Equipo Organizador",
-    "description": "El equipo apasionado detrás del AWS Student Community Day, dedicado a brindarte una experiencia de aprendizaje increíble."
+    "date": "13 de Septiembre, 2025 • 8:00 AM"
   },
   "registration": {
     "title": "¿Listo para Unirte?",
