@@ -116,8 +116,6 @@
           "description": "IAM, grupos de seguridad y gestión de acceso"
         }
       },
-      "duration": "4 horas",
-      "seats": "50 cupos",
       "button": "Unirse al Track"
     },
     "track2": {
@@ -144,8 +142,6 @@
           "description": "Domina entrevistas enfocadas en cloud y orientación sobre certificaciones"
         }
       },
-      "duration": "5 horas",
-      "seats": "50 cupos",
       "button": "Unirse al Track"
     },
     "track3": {
@@ -172,8 +168,6 @@
           "description": "Últimos servicios de AWS y tendencias de la industria"
         }
       },
-      "duration": "5 horas",
-      "seats": "50 cupos",
       "button": "Unirse al Track"
     },
     "info": {
@@ -245,6 +239,7 @@
     "description": "Estamos agradecidos con nuestros patrocinadores que hacen posible este evento y apoyan el crecimiento de la comunidad de computación en la nube.",
     "tiers": {
       "main": "Patrocinador Principal",
+      "mainPartner": "Aliado Principal",
       "academic": "Socio Académico",
       "community": "Socios Comunitarios"
     },
@@ -253,6 +248,9 @@
     },
     "udea": {
       "description": "Socio académico"
+    },
+    "eafit": {
+      "description": "Aliado principal que proporciona las instalaciones y el espacio para el evento"
     },
     "awsug": {
       "name": "AWS User Group Medellín",
@@ -298,6 +296,12 @@
       "register": "Registrarse Ahora"
     },
     "date": "13 de Septiembre, 2025 • 9:00 AM"
+  },
+  "organizers": {
+    "badge": "Organizadores del Evento",
+    "title": "Conoce Nuestro",
+    "titleHighlight": "Equipo Organizador",
+    "description": "El equipo apasionado detrás del AWS Student Community Day, dedicado a brindarte una experiencia de aprendizaje increíble."
   },
   "registration": {
     "title": "¿Listo para Unirte?",
