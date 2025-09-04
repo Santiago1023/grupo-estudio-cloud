@@ -242,6 +242,7 @@
     "description": "We're grateful to our sponsors who make this event possible and support the growth of the cloud computing community.",
     "tiers": {
       "main": "Main Sponsor",
+      "mainPartner": "Main Partner",
       "academic": "Academic Partner",
       "community": "Community Partners"
     },
@@ -250,6 +251,9 @@
     },
     "udea": {
       "description": "Academic partner"
+    },
+    "eafit": {
+      "description": "Main partner providing venue and facilities for the event"
     },
     "awsug": {
       "name": "AWS User Group Medellín",
@@ -269,6 +273,12 @@
       "description": "Help us make this event even better and reach more students",
       "button": "awscloudclubudea@gmail.com"
     }
+  },
+  "organizers": {
+    "badge": "Event Organizers",
+    "title": "Meet Our",
+    "titleHighlight": "Organizing Team",
+    "description": "The passionate team behind AWS Student Community Day, dedicated to bringing you an amazing learning experience."
   },
   "location": {
     "badge": "Event Location",
