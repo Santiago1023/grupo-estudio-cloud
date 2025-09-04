@@ -8,7 +8,6 @@ import Speakers from '../components/Speakers.astro';
 import Agenda from '../components/Agenda.astro';
 import Sponsors from '../components/Sponsors.astro';
 import Location from '../components/Location.astro';
-import Organizers from '../components/Organizers.astro';
 import Registration from '../components/Registration.astro';
 import Footer from '../components/Footer.astro';
 ---
@@ -47,7 +46,7 @@ import Footer from '../components/Footer.astro';
       }
 
       .map-image {
-        max-width: 70%;
+        max-width: 100%;
         height: auto;
         border-radius: 12px;
         box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
@@ -80,8 +79,8 @@ import Footer from '../components/Footer.astro';
       }
 
       .map-expanded {
-        max-width: 95%;
-        max-height: 95%;
+        max-width: 90%;
+        max-height: 90%;
         border-radius: 12px;
       }
 
@@ -142,7 +141,6 @@ import Footer from '../components/Footer.astro';
     </script>
     <Sponsors />
     <Location />
-    <Organizers />
     <Registration />
   </main>
   <Footer />
