@@ -78,14 +78,7 @@ const lang = getCurrentLanguage(Astro.url);
           </div>
         </div>
         
-        <div class="track-footer">
-          <div class="track-stats">
-            <span><i class="fas fa-clock"></i> {t(lang, 'tracks.track1.duration')}</span>
-            <span><i class="fas fa-users"></i> {t(lang, 'tracks.track1.seats')}</span>
-          </div>
-          <!-- TODO: Uncomment when track registration system is ready -->
-          <!-- <a href="#register" class="btn btn-secondary">{t(lang, 'tracks.track1.button')}</a> -->
-        </div>
+
       </div>
       
       <!-- Track 2: DevOps & Automation -->
@@ -144,14 +137,7 @@ const lang = getCurrentLanguage(Astro.url);
           </div>
         </div>
         
-        <div class="track-footer">
-          <div class="track-stats">
-            <span><i class="fas fa-clock"></i> {t(lang, 'tracks.track2.duration')}</span>
-            <span><i class="fas fa-users"></i> {t(lang, 'tracks.track2.seats')}</span>
-          </div>
-          <!-- TODO: Uncomment when track registration system is ready -->
-          <!-- <a href="#register" class="btn btn-primary">{t(lang, 'tracks.track2.button')}</a> -->
-        </div>
+
       </div>
       
       <!-- Track 3: AI/ML & Data -->
@@ -210,14 +196,7 @@ const lang = getCurrentLanguage(Astro.url);
           </div>
         </div>
         
-        <div class="track-footer">
-          <div class="track-stats">
-            <span><i class="fas fa-clock"></i> {t(lang, 'tracks.track3.duration')}</span>
-            <span><i class="fas fa-users"></i> {t(lang, 'tracks.track3.seats')}</span>
-          </div>
-          <!-- TODO: Uncomment when track registration system is ready -->
-          <!-- <a href="#register" class="btn btn-secondary">{t(lang, 'tracks.track3.button')}</a> -->
-        </div>
+
       </div>
     </div>
   </div>
@@ -250,7 +229,6 @@ const lang = getCurrentLanguage(Astro.url);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    min-height: 580px; /* Altura mínima para alinear botones */
   }
 
   .track-card:hover {
@@ -393,7 +371,7 @@ const lang = getCurrentLanguage(Astro.url);
   }
 
   .workshop-list {
-    margin-bottom: 2rem;
+    margin-bottom: 0;
   }
 
   .workshop-item {
@@ -436,31 +414,7 @@ const lang = getCurrentLanguage(Astro.url);
     line-height: 1.4;
   }
 
-  .track-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--aws-gray-light);
-    margin-top: auto; /* Empuja el footer hacia abajo */
-  }
 
-  .track-stats {
-    display: flex;
-    gap: 1rem;
-  }
-
-  .track-stats span {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--aws-dark);
-    font-size: 0.9rem;
-  }
-
-  .track-stats i {
-    color: var(--aws-blue);
-  }
 
   /* Badge Styles */
   .badge {
@@ -537,16 +491,7 @@ const lang = getCurrentLanguage(Astro.url);
       transform: none;
     }
 
-    .track-footer {
-      flex-direction: column;
-      gap: 1rem;
-      align-items: stretch;
-    }
 
-    .btn {
-      width: 100%;
-      justify-content: center;
-    }
 
     .track-info h3 {
       font-size: 1.3rem;

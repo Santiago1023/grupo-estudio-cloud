@@ -1,0 +1,155 @@
+---
+import { getCurrentLanguage, t } from '../i18n/utils';
+
+const lang = getCurrentLanguage(Astro.url);
+---
+
+<section id="organizers" class="organizers">
+  <div class="container">
+    <div class="text-center">
+      <div class="section-badge">
+        <i class="fas fa-users"></i>
+        <span>{t(lang, 'organizers.badge')}</span>
+      </div>
+      
+      <h2 class="section-title">
+        {t(lang, 'organizers.title')} <span class="gradient-text">{t(lang, 'organizers.titleHighlight')}</span>
+      </h2>
+      
+      <p class="section-description">
+        {t(lang, 'organizers.description')}
+      </p>
+    </div>
+    
+    <div class="organizers-grid">
+      <!-- Organizador 1 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/lore.jpg" alt="Lorena Jiménez Arias" />
+        </div>
+        <div class="organizer-info">
+          <h3>Lorena Jiménez Arias</h3>
+          <p class="organizer-role">Especialista de Servicios Cloud</p>
+        </div>
+      </div>
+      
+      <!-- Organizador 2 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/santi.jpg" alt="Santiago Bedoya Díaz" />
+        </div>
+        <div class="organizer-info">
+          <h3>Santiago Bedoya Díaz</h3>
+          <p class="organizer-role">AWS Cloud Club Captain</p>
+        </div>
+      </div>
+      
+      <!-- Organizador 3 - Ejemplo -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/organizer3.jpg" alt="Nombre Organizador 3" />
+        </div>
+        <div class="organizer-info">
+          <h3>Nombre Organizador 3</h3>
+          <p class="organizer-role">Coordinador de Eventos</p>
+        </div>
+      </div>
+      
+      <!-- Organizador 4 - Ejemplo -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/organizer4.jpg" alt="Nombre Organizador 4" />
+        </div>
+        <div class="organizer-info">
+          <h3>Nombre Organizador 4</h3>
+          <p class="organizer-role">Especialista en Tecnología</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .organizers {
+    padding: 5rem 0;
+    background: var(--aws-white);
+  }
+
+  .organizers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .organizer-card {
+    background: var(--aws-white);
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--aws-gray-light);
+    transition: all 0.3s ease;
+  }
+
+  .organizer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  .organizer-image {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid var(--aws-orange);
+    position: relative;
+  }
+
+  .organizer-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .organizer-card:hover .organizer-image img {
+    transform: scale(1.1);
+  }
+
+  .organizer-info h3 {
+    color: var(--aws-navy);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .organizer-role {
+    color: var(--aws-orange);
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .organizers-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .organizer-card {
+      padding: 1.5rem;
+    }
+
+    .organizer-image {
+      width: 120px;
+      height: 120px;
+    }
+  }
+</style>

@@ -8,6 +8,7 @@ import Speakers from '../components/Speakers.astro';
 import Agenda from '../components/Agenda.astro';
 import Sponsors from '../components/Sponsors.astro';
 import Location from '../components/Location.astro';
+import Organizers from '../components/Organizers.astro';
 import Registration from '../components/Registration.astro';
 import Footer from '../components/Footer.astro';
 ---
@@ -24,11 +25,124 @@ import Footer from '../components/Footer.astro';
       <div class="container">
         <h2 class="section-title">Campus Map</h2>
         <p class="map-description">Event rooms are highlighted on the campus map</p>
-        <img src="/mapa.jpeg" alt="Event Location Map" class="map-image" />
+        <div class="map-container">
+          <img src="/mapa.jpg" alt="Event Location Map" class="map-image clickable" id="campusMap" />
+          <div class="map-overlay" id="mapOverlay">
+            <span class="close-btn" id="closeMap">&times;</span>
+            <img src="/mapa.jpg" alt="Event Location Map" class="map-expanded" />
+          </div>
+        </div>
       </div>
     </section>
+
+    <style>
+      .map-section {
+        padding: 4rem 0;
+        background: var(--aws-gray-light);
+      }
+
+      .map-container {
+        position: relative;
+        text-align: center;
+      }
+
+      .map-image {
+        max-width: 70%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .map-image.clickable {
+        cursor: pointer;
+      }
+
+      .map-image.clickable:hover {
+        transform: scale(1.02);
+      }
+
+      .map-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .map-overlay.active {
+        display: flex;
+      }
+
+      .map-expanded {
+        max-width: 95%;
+        max-height: 95%;
+        border-radius: 12px;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        color: white;
+        font-size: 40px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1001;
+      }
+
+      .close-btn:hover {
+        opacity: 0.7;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 1rem;
+        color: var(--aws-navy);
+      }
+
+      .map-description {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: var(--aws-dark);
+      }
+    </style>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const mapImage = document.getElementById('campusMap');
+        const mapOverlay = document.getElementById('mapOverlay');
+        const closeBtn = document.getElementById('closeMap');
+
+        mapImage.addEventListener('click', function() {
+          mapOverlay.classList.add('active');
+        });
+
+        closeBtn.addEventListener('click', function() {
+          mapOverlay.classList.remove('active');
+        });
+
+        mapOverlay.addEventListener('click', function(e) {
+          if (e.target === mapOverlay) {
+            mapOverlay.classList.remove('active');
+          }
+        });
+
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            mapOverlay.classList.remove('active');
+          }
+        });
+      });
+    </script>
     <Sponsors />
     <Location />
+    <Organizers />
     <Registration />
   </main>
   <Footer />
