@@ -44,7 +44,19 @@ const lang = getCurrentLanguage(Astro.url);
         </div>
       </div>
       
+      
       <!-- Organizador 3 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/ana.jpg" alt="Ana Barragán" />
+        </div>
+        <div class="organizer-info">
+          <h3>Ana Barragán</h3>
+          <p class="organizer-role">Solutions Architect</p>
+        </div>
+      </div>
+
+      <!-- Organizador 4 -->
       <div class="organizer-card">
         <div class="organizer-image">
           <img src="/isaac.jpg" alt="Isaac Mesa Gómez" />
@@ -54,15 +66,107 @@ const lang = getCurrentLanguage(Astro.url);
           <p class="organizer-role">Core Team Member</p>
         </div>
       </div>
-      
-      <!-- Organizador 4 - Ejemplo -->
+
+      <!-- Organizador 5 -->
       <div class="organizer-card">
         <div class="organizer-image">
-          <img src="/organizer4.jpg" alt="Nombre Organizador 4" />
+          <img src="/anaudea.jpg" alt="Ana Isabel Patiño" />
         </div>
         <div class="organizer-info">
-          <h3>Nombre Organizador 4</h3>
-          <p class="organizer-role">Especialista en Tecnología</p>
+          <h3>Ana Isabel Patiño</h3>
+          <p class="organizer-role">Core Team Member</p>
+        </div>
+      </div>
+      <!-- Organizador 6 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/andres.jpg" alt="Andrés Quintero" />
+        </div>
+        <div class="organizer-info">
+          <h3>Andrés Quintero</h3>
+          <p class="organizer-role">AI Engineer</p>
+        </div>
+      </div>
+      
+      <!-- Organizador 7 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/sanchez.jpg" alt="Santiago Sanchez" />
+        </div>
+        <div class="organizer-info">
+          <h3>Santiago Sanchez</h3>
+          <p class="organizer-role">Full Stack developer</p>
+        </div>
+      </div>
+      <!-- Organizador 8 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/davidarias.jpg" alt="David Arias" />
+        </div>
+        <div class="organizer-info">
+          <h3>David Arias</h3>
+          <p class="organizer-role">DevOps Engineer</p>
+        </div>
+      </div>
+      <!-- Organizador 9 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/jounas.jpg" alt="Jhonatan Tamayo" />
+        </div>
+        <div class="organizer-info">
+          <h3>Jhonatan Tamayo</h3>
+          <p class="organizer-role">QA Engineer</p>
+        </div>
+      </div>
+      
+      <!-- Organizador 11 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/mauro.jpg" alt="Mauricio Alvarado" />
+        </div>
+        <div class="organizer-info">
+          <h3>Mauricio Alvarado</h3>
+          <p class="organizer-role">Cloud Architect</p>
+        </div>
+      </div>
+      <!-- Organizador 12 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/emanuel.jpg" alt="Emmanuel Valbuena" />
+        </div>
+        <div class="organizer-info">
+          <h3>Emmanuel Valbuena</h3>
+          <p class="organizer-role">Core Team Member</p>
+        </div>
+      </div>
+      <!-- Organizador 13 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/sebastianbog.jpg" alt="Sebastian" />
+        </div>
+        <div class="organizer-info">
+          <h3>Sebastian</h3>
+          <p class="organizer-role">AWS Cloud Club Captain</p>
+        </div>
+      </div>
+      <!-- Organizador 14 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/juan.jpg" alt="Juan David Villota" />
+        </div>
+        <div class="organizer-info">
+          <h3>Juan David Villota</h3>
+          <p class="organizer-role">AWS enthusiast</p>
+        </div>
+      </div>
+      <!-- Organizador 15 -->
+      <div class="organizer-card">
+        <div class="organizer-image">
+          <img src="/graciano.jpg" alt="Santiago Graciano" />
+        </div>
+        <div class="organizer-info">
+          <h3>Santiago Graciano</h3>
+          <p class="organizer-role">Core Team Member</p>
         </div>
       </div>
     </div>
@@ -77,20 +181,20 @@ const lang = getCurrentLanguage(Astro.url);
 
   .organizers-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
     margin-top: 3rem;
-    max-width: 1000px;
+    max-width: 1200px;
     margin-left: auto;
     margin-right: auto;
   }
 
   .organizer-card {
     background: var(--aws-white);
-    border-radius: 16px;
-    padding: 2rem;
+    border-radius: 12px;
+    padding: 1.5rem;
     text-align: center;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     border: 1px solid var(--aws-gray-light);
     transition: all 0.3s ease;
   }
@@ -103,7 +207,7 @@ const lang = getCurrentLanguage(Astro.url);
   .organizer-image {
     width: 140px;
     height: 140px;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 1rem;
     border-radius: 50%;
     overflow: hidden;
     border: 4px solid var(--aws-orange);
@@ -123,28 +227,45 @@ const lang = getCurrentLanguage(Astro.url);
 
   .organizer-info h3 {
     color: var(--aws-navy);
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
+    line-height: 1.3;
   }
 
   .organizer-role {
     color: var(--aws-orange);
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
   }
 
   /* Responsive */
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
     .organizers-grid {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.3rem;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .organizers-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .organizers-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      max-width: 350px;
     }
 
     .organizer-card {
-      padding: 1.5rem;
+      padding: 1.2rem;
     }
 
     .organizer-image {
