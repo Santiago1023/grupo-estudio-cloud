@@ -16,26 +16,45 @@ El **AWS Student Community Day** es un evento de un día completo, liderado por 
 
 ## 📂 Estructura del Repositorio
 
-Este repositorio contiene todo el material educativo organizado por tracks:
+Este repositorio contiene todo el material educativo organizado por salones:
 
+### 🏛️ [`auditorio/`](./auditorio)
+**Keynotes y charlas principales**  
+- Sesiones magistrales con AWS Heroes, Community Builders y líderes de User Groups
+- Charlas motivacionales y de proyección profesional
+- Temas: IA, GenAI, Networking, Desarrollo profesional
+
+### 🚀 [`bloque 34-301/`](./bloque%2034-301)
+**Track Técnico Avanzado**  
+- Sesiones técnicas especializadas
+- Temas: CloudFront, APIs con IA, Seguridad, Microservicios
+- Nivel: Intermedio a Avanzado
+
+### 💼 [`bloque 35-201/`](./bloque%2035-201)
+**Track Profesional y Fundamentos**  
+- Desarrollo profesional y experiencias personales
+- Temas: Roadmaps, Serverless, FinOps, IaC
+- Nivel: Principiante a Intermedio
 
 ## 📋 Organización del Material
 
-Cada carpeta de track contiene:
+Cada salón contiene:
 
 ```
 salon/
-├── sesion-01-nombre/
-│   ├── presentacion.pptx
-│   └── README.md
-├── sesion-02-nombre/
-│   ├── presentacion.pptx
-│   └── README.md
+├── sesion-01-speaker-nombre/
+│   ├── presentacion.pdf
+│   ├── README.md (opcional)
+│   └── recursos/ (opcional)
+├── sesion-02-speaker-nombre/
+│   └── presentacion.pdf
 └── README.md
 ```
 
-### 📄 Contenido de cada sesión:
-- **`presentacion.pptx`** - Slides de la presentación
+### 📄 Contenido disponible:
+- **Presentaciones PDF** - Slides de cada sesión
+- **READMEs específicos** - Recursos adicionales y enlaces
+- **Material complementario** - Imágenes, códigos, demos
 
 
 ## 🎓 Para Estudiantes
@@ -46,6 +65,13 @@ salon/
 - [AWS Documentation](https://docs.aws.amazon.com/)
 - [AWS Skill Builder](https://skillbuilder.aws/)
 - [AWS Certification](https://aws.amazon.com/certification/)
+- [Sitio web del evento](https://awsstudentcommunityday.com/es/)
+
+## 📊 Estadísticas del Evento
+- **Total de sesiones:** 18 presentaciones
+- **Speakers:** 20+ expertos nacionales e internacionales
+- **Salones:** 3 espacios simultáneos
+- **Duración:** 8 horas de contenido técnico
 
 ## 👥 Organizadores
 
@@ -61,6 +87,7 @@ Este evento es organizado por los **AWS Cloud Club** en colaboración con:
 
 - **Email:** awscloudclubudea@gmail.com
 - **Website:** [Sitio del evento](https://awsstudentcommunityday.com/es/)
+- **📅 Agenda detallada:** [Ver horarios completos](./AGENDA.md)
 
 ---
 

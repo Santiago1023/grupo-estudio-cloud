@@ -1,9 +1,15 @@
-# 🎓 Auditorio
+# 🏛️ Auditorio - Keynotes y Charlas Principales
 
-## 📋 Descripción del Track
+## 📋 Descripción
 
+El auditorio principal alberga las sesiones magistrales del evento, incluyendo keynotes de apertura, charlas inspiracionales y presentaciones de alto impacto con AWS Heroes, Community Builders y líderes de la comunidad.
 
-## 🎯 Objetivos de Aprendizaje
+## 🎯 Objetivos
+
+- Inspirar y motivar a los asistentes
+- Compartir experiencias y casos de éxito
+- Presentar las últimas tendencias en AWS y GenAI
+- Conectar con líderes de la comunidad AWS
 
 
 ## 📚 Sesiones del Track
